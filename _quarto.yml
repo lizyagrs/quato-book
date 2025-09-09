@@ -1,0 +1,25 @@
+project:
+  type: book
+
+book:
+  title: "quato-book"
+  author: "lizyagrs"
+  date: "2025/9/9"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  # pdf:
+  #   documentclass: scrreprt
+
+
+
