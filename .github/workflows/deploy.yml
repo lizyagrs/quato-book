@@ -10,12 +10,16 @@ jobs:
 
     steps:
       # 1. 检出仓库代码
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
 
-      # 2. 安装 Quarto CLI（最新稳定版）
-      - name: Install Quarto
-        uses: quarto-dev/quarto-actions/setup-quarto@v2
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.4.552 # 使用具体版本
 
       # 3. 渲染书籍为 HTML
       - name: Render Book to HTML
