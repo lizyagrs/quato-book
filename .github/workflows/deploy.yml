@@ -1,0 +1,33 @@
+name: Deploy Book to GitHub Pages
+
+on:
+  push:
+    branches: [main] # 假设您的默认分支是 main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 检出仓库代码
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. 安装 Quarto CLI（最新稳定版）
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup-quarto@v2
+
+      # 3. 渲染书籍为 HTML
+      - name: Render Book to HTML
+        run: |
+          quarto render
+
+      # 4. 部署 HTML 到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          force_orphan: true
+          commit_message: Auto-deploy from ${{ github.sha }}
